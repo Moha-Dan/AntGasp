@@ -1,4 +1,4 @@
-package web;
+package org.springframework.web.bind.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

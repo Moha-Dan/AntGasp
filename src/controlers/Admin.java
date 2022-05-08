@@ -1,6 +1,9 @@
 package controlers;
 
-import web.*;
+import org.springframework.persistence.EntityManager;
+import org.springframework.stereotype.Controler;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.Method;
 
 @Controler("/admin")
 public class Admin {
@@ -8,12 +11,11 @@ public class Admin {
 	@Method("/")
 	public String index(Model mdl) {
 		mdl.setAttribute("result", "cette page d'accueil admin");
-		return "stats.jsp";
+		return "index.jsp";
 	}
 	
 	@Method(value = "/invite",method = Method.GET)
 	public String invite(Model mdl) {
-		System.out.println();
 		return "invite.jsp";
 	}
 	@Method(value = "/invite",method = Method.POST)
@@ -37,9 +39,14 @@ public class Admin {
 	}
 	
 	
-	@Method("/login")
+	@Method(value="/login",method = Method.GET)
 	public String login(Model mdl) {
 		mdl.setAttribute("result", "cette page est pour se connecter en admin");
-		return "stats.jsp";
+		return "login.jsp";
+	}
+	@Method(value="/login",method = Method.POST)
+	public String connect(Model mdl) {
+		mdl.setAttribute("error", "il n'y a pas de system de connection");
+		return "login.jsp";
 	}
 }

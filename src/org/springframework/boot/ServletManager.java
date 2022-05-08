@@ -1,4 +1,4 @@
-package web;
+package org.springframework.boot;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.reflections.Reflections;
+import org.springframework.persistence.EntityManager;
+import org.springframework.stereotype.Controler;
+import org.springframework.ui.Model;
 
 /**
  * Servlet implementation class ServletManager
@@ -54,9 +57,9 @@ public class ServletManager extends HttpServlet {
 				logs.append(value+"\n");
 				if(url.startsWith(value)) {
 					for (Method method_controler : controler.getDeclaredMethods()) {
-			            if (method_controler.isAnnotationPresent(web.Method.class)) {
+			            if (method_controler.isAnnotationPresent(org.springframework.web.bind.annotation.Method.class)) {
 			                method_controler.setAccessible(true);
-			                web.Method mt = method_controler.getAnnotation(web.Method.class);
+			                org.springframework.web.bind.annotation.Method mt = method_controler.getAnnotation(org.springframework.web.bind.annotation.Method.class);
 			                logs.append(value+mt.value()+"\n");
 			                logs.append(mt.method()+"\n");
 			                System.out.println(">>" + (method.equals(mt.method())) +" && "+ (url.startsWith(value+mt.value())));

@@ -1,4 +1,4 @@
-package web;
+package org.springframework.ui;
 
 import java.util.Enumeration;
 
