@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.reflections.Reflections;
+import com.reflections.Reflections;
 import com.falls.ui.Model;
 import com.falls.persistence.EntityManager;
 import com.falls.stereotype.Controler;
@@ -82,7 +82,7 @@ public class ServletManager extends HttpServlet {
 		return view;
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println(request.getRequestURI());
 		Model mdl = new ConcretModel(request);
 
 		String view = matcher(request, mdl);

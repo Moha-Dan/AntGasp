@@ -1,21 +1,10 @@
 package com.falls.persistence;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
-import org.reflections.Reflections;
+import com.reflections.Reflections;
+
 
 public class EntityManager {
 	private static Reflections reflections = new Reflections("entities");
