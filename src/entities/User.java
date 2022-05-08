@@ -1,6 +1,6 @@
 package entities;
 
-import org.springframework.persistence.Entity;
+import com.falls.persistence.Entity;
 
 @Entity
 public class User {
