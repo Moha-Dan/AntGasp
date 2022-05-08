@@ -1,6 +1,6 @@
 package entities;
 
-import com.falls.persistence.Entity;
+import com.fall.persistence.Entity;
 
 @Entity
 public class User {

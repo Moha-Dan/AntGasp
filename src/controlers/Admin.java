@@ -1,9 +1,9 @@
 package controlers;
 
-import com.falls.persistence.EntityManager;
-import com.falls.stereotype.Controler;
-import com.falls.ui.Model;
-import com.falls.web.bind.annotation.Method;
+import com.fall.persistence.EntityManager;
+import com.fall.stereotype.Controler;
+import com.fall.ui.Model;
+import com.fall.web.bind.annotation.Method;
 
 @Controler("/admin")
 public class Admin {
