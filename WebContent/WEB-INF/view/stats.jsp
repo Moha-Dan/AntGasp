@@ -9,5 +9,7 @@
 <body>
 ${ result }
 <p> Nombre utilisaeur : ${ usernb }</p>
+<p> Nombre Panier : ${ paniernb }</p>
+<p> Nombre Commercant : ${ commercantnb }</p>
 </body>
 </html>

@@ -8,5 +8,14 @@
 </head>
 <body>
 ${ paniers }
+<form method="POST">
+	<input type="hidden" hidden name="operation" value="ADD">
+	<label>Categorie</label>
+	<select>
+		<option>Repas</option>
+		<option>Perimer</option>
+	</select>
+	<input type="submit">
+</form>
 </body>
 </html>
