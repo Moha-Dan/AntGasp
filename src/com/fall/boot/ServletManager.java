@@ -3,6 +3,7 @@ package com.fall.boot;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.http.HttpRequest;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +38,6 @@ public class ServletManager extends HttpServlet {
 	 */
 	private String matcher(HttpServletRequest request,Model mdl) {
 		String url = request.getRequestURI();
-		System.out.println(url);
 		url = url.replaceFirst("/[^/]*", "");
 		String method = request.getMethod();
 		Set<Class<?>> controlers = reflections.getTypesAnnotatedWith(Controler.class);
@@ -47,25 +47,30 @@ public class ServletManager extends HttpServlet {
 		logs.append(method+"\n");
 		
 		String view = errorPage;
+		String lastChoice = "";
 		for(Class<?> controler : controlers) {
 			Controler c = controler.getAnnotation(Controler.class);
 			if(c!=null) {
 				String value = c.value();
 				logs.append(value+"\n");
 				if(url.startsWith(value)) {
+					System.out.println("URL : "+url+";Controler : "+value);
 					for (Method method_controler : controler.getDeclaredMethods()) {
 			            if (method_controler.isAnnotationPresent(com.fall.web.bind.annotation.Method.class)) {
 			                method_controler.setAccessible(true);
 			                com.fall.web.bind.annotation.Method mt = method_controler.getAnnotation(com.fall.web.bind.annotation.Method.class);
 			                logs.append(value+mt.value()+"\n");
 			                logs.append(mt.method()+"\n");
-			                System.out.println(">>" + (method.equals(mt.method())) +" && "+ (url.startsWith(value+mt.value())));
-			                if(method.equals(mt.method()) && url.startsWith(value+mt.value())) {
+			                String page = (value+mt.value()).replaceAll("//", "/");
+			                System.out.println("URL : "+url+";Page : "+page);
+			                if(method.equals(mt.method()) && url.startsWith(page) && page.length()>lastChoice.length()) {
+			                	System.out.println("< selected >");
+			                	lastChoice = page;
 			                	try {
-			                		Object control_obj = this.controlers.get(method_controler.getName());
+			                		Object control_obj = this.controlers.get(value);
 			                		if(control_obj==null) {
 			                			control_obj = controler.getConstructor().newInstance();
-			                			this.controlers.put(method_controler.getName(),control_obj);
+			                			this.controlers.put(value,control_obj);
 			                		}
 			                		view = (String) method_controler.invoke(control_obj,mdl);
 								} catch (IllegalAccessException | IllegalArgumentException
@@ -78,7 +83,7 @@ public class ServletManager extends HttpServlet {
 				}
 			}
 		}
-			//System.out.println(logs);
+		System.out.println(view);
 		return view;
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -86,10 +91,16 @@ public class ServletManager extends HttpServlet {
 		Model mdl = new ConcretModel(request);
 
 		String view = matcher(request, mdl);
+
+		if(view==null) return;
 		
-		
-		if(view!=null)
+		if(!view.startsWith("redirect:")) {
 			request.getRequestDispatcher("/WEB-INF/view/"+view).forward(request, response);
+			return;
+		}else {			
+			String url = view.replaceFirst("redirect:", "");
+			response.sendRedirect(url);
+		}
 	}
 
 	/**
@@ -106,9 +117,15 @@ public class ServletManager extends HttpServlet {
 		
 		String view = matcher(request, mdl);
 		
+		if(view==null) return;
 		
-		if(view!=null)
+		if(!view.startsWith("redirect:")) {
 			request.getRequestDispatcher("/WEB-INF/view/"+view).forward(request, response);
+			return;
+		}else {			
+			String url = view.replaceFirst("redirect:", "");
+			response.sendRedirect(url);
+		}
 	}
 	private class ConcretModel implements Model{
 		private HttpServletRequest request;
@@ -135,6 +152,15 @@ public class ServletManager extends HttpServlet {
 		@Override
 		public Enumeration<String> getAttributeNames() {
 			return request.getAttributeNames();
+		}
+		@Override
+		public String getAttributeAsString(String name) {
+			String[] strs = (String[]) request.getAttribute(name);
+			return strs[0];
+		}
+		@Override
+		public HttpServletRequest getRequest() {
+			return (HttpServletRequest) request;
 		}
 		
 	}

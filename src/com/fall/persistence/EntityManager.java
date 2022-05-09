@@ -12,6 +12,7 @@ public class EntityManager {
 	public Table get(String string) {
 		return tables.get(string);
 	}
+	
 	public EntityManager() {
 		Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
 		for(Class<?> entity : entities) {
@@ -25,6 +26,10 @@ public class EntityManager {
 	private static EntityManager instance = new EntityManager();
 	public static EntityManager createInstance() {
 		return instance;
+	}
+
+	public Set<String> getTables() {
+		return tables.keySet();
 	}
 
 }
