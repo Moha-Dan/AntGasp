@@ -34,10 +34,22 @@ public class Commercant {
 		this.week = new Schedule(open,close);
 	}
 	
+	public Commercant() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private String nomCommercial;
 	private String adresse,cp,ville,email,tel;
 	private String website;
+	private String category;
 	private String facebook,instagram;
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	
 	private Schedule week;
 	public String getNomCommercial() {

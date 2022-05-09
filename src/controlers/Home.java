@@ -27,7 +27,7 @@ public class Home {
 		HttpSession session = mdl.getRequest().getSession(false);
 		if(login.hasSession(session))
 			return "redirect:dashboard";
-		return "login.jsp";
+		return "client.jsp";
 	}
 	
 	@Method(value="/login",method = Method.POST)
@@ -37,7 +37,7 @@ public class Home {
 		HttpSession session = mdl.getRequest().getSession(true);
 		if(!login.connect(username,password,session) ){
 			mdl.setAttribute("error", "il n'y a pas de system de connection");
-			return "login.jsp";	
+			return "client.jsp";	
 		}else {
 			return "redirect:dashboard";
 		}
@@ -51,7 +51,7 @@ public class Home {
 		HttpSession session = mdl.getRequest().getSession(true);
 		if(!login.connect(username,password,session) ){
 			mdl.setAttribute("error", "il n'y a pas de system de connection");
-			return "login.jsp";	
+			return "client.jsp";	
 		}else {
 			return "redirect:index";
 		}
