@@ -18,7 +18,7 @@ public class Home {
 	public String index(Model mdl) {
 		return "index.jsp";
 	}
-	@Method("/search")
+	@Method(value="/search",method = Method.POST)
 	public String panier_commercant(Model mdl) {
 		return "index.jsp";
 	}
