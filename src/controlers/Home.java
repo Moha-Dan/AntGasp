@@ -7,20 +7,24 @@ import com.fall.stereotype.Controler;
 import com.fall.ui.Model;
 import com.fall.web.bind.annotation.Method;
 
+import entities.Panier;
 import task.Login;
+import task.PanierGRUD;
 
 @Controler("/")
 public class Home {
 	EntityManager em = EntityManager.createInstance();
 	Login login = new Login(em.get("User"));
-	
+	PanierGRUD paniers = new PanierGRUD(em.get("Panier"));
 	@Method("/")
 	public String index(Model mdl) {
+		mdl.setAttribute("paniers", paniers.randomPanier());
 		return "index.jsp";
 	}
-	@Method(value="/search",method = Method.POST)
+	@Method(value="/search")
 	public String panier_commercant(Model mdl) {
-		return "index.jsp";
+		mdl.setAttribute("choices", paniers.find(mdl));
+		return "search.jsp";
 	}
 	@Method(value="/login",method = Method.GET)
 	public String login(Model mdl) {

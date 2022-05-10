@@ -1,5 +1,7 @@
 package task;
 
+import java.util.List;
+
 import com.fall.persistence.GRUD;
 import com.fall.persistence.Table;
 import com.fall.ui.Model;
@@ -18,5 +20,11 @@ public class PanierGRUD extends GRUD<Panier>{
 	public void add(Model m) {
 		Panier a = new Panier();
 		paniers.add(a);
+	}
+	public List<Panier> randomPanier() {
+		return null;
+	}
+	public List<Panier> find(Model mdl) {
+		return null;
 	}
 }
