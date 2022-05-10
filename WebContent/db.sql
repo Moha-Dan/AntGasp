@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS `User`;CREATE TABLE `User` (`User_id` INTEGER NOT NULL ,`username` TEXT  ,`password` TEXT  ,PRIMARY KEY (`User_id`));
+DROP TABLE IF EXISTS `Schedule`;CREATE TABLE `Schedule` (`Schedule_id` INTEGER NOT NULL ,`id` TEXT  ,`ouverture` TEXT  ,`fermeture` TEXT  ,PRIMARY KEY (`Schedule_id`));
+DROP TABLE IF EXISTS `Commercant`;CREATE TABLE `Commercant` (`Commercant_id` INTEGER NOT NULL ,`id` TEXT  ,`nomCommercial` TEXT  ,`adresse` TEXT  ,`cp` TEXT  ,`ville` TEXT  ,`email` TEXT  ,`tel` TEXT  ,`website` TEXT  ,`category` TEXT  ,`facebook` TEXT  ,`instagram` TEXT  ,`week` TEXT  ,PRIMARY KEY (`Commercant_id`));
+DROP TABLE IF EXISTS `Panier`;CREATE TABLE `Panier` (`Panier_id` INTEGER NOT NULL ,PRIMARY KEY (`Panier_id`));

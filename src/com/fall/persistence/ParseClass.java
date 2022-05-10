@@ -3,6 +3,7 @@ package com.fall.persistence;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,5 +48,44 @@ public class ParseClass {
 		}
 		while(it1.hasNext() && isequal);
 		return isequal;
+	}
+	public Object assign(Class<?> target,Class<?> source){
+		HashMap<String,Object> sourceMap = ParseClass.parse(source);
+		Object c = null; 
+		try {
+			c = target.getConstructor().newInstance();
+			List<Field> lsf = Arrays.asList(target.getFields());
+			List<Method> lsm = Arrays.asList(target.getDeclaredMethods());
+			for( Field field : lsf) {
+				String fn = field.getName();
+				String fl = (fn.charAt(0)+"").toUpperCase();
+				String method = "set"+fl+fn.substring(1);
+				Method gm = lsm.stream().filter((Method m)->{
+					return m.getName() == method;
+				}).findFirst().get();
+			}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+	public static Object getPropriety(Object obj,String field) {
+		Object value = null;
+		try {
+			Method m = obj.getClass().getDeclaredMethod("get"+field);
+			m.invoke(obj);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
+	public static void setPropriety(Object obj,String field,Object value) {
+		try {
+			Method m = obj.getClass().getDeclaredMethod("set"+field, value.getClass());
+			m.invoke(obj, value);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 }

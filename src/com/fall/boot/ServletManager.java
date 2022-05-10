@@ -54,7 +54,7 @@ public class ServletManager extends HttpServlet {
 				String value = c.value();
 				logs.append(value+"\n");
 				if(url.startsWith(value)) {
-					System.out.println("URL : "+url+";Controler : "+value);
+					logs.append("URL : "+url+";Controler : "+value);
 					for (Method method_controler : controler.getDeclaredMethods()) {
 			            if (method_controler.isAnnotationPresent(com.fall.web.bind.annotation.Method.class)) {
 			                method_controler.setAccessible(true);
@@ -62,9 +62,8 @@ public class ServletManager extends HttpServlet {
 			                logs.append(value+mt.value()+"\n");
 			                logs.append(mt.method()+"\n");
 			                String page = (value+mt.value()).replaceAll("//", "/");
-			                System.out.println("URL : "+url+";Page : "+page);
+			                logs.append("URL : "+url+";Page : "+page);
 			                if(method.equals(mt.method()) && url.startsWith(page) && page.length()>lastChoice.length()) {
-			                	System.out.println("< selected >");
 			                	lastChoice = page;
 			                	try {
 			                		Object control_obj = this.controlers.get(value);
