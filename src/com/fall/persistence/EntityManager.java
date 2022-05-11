@@ -14,14 +14,16 @@ public class EntityManager {
 	}
 	
 	public EntityManager() {
-		SQLTable.setJdbcURL("jdbc:sqlite:database.db");
+		//jdbc:sqlite:database.db
+		SQLTable.setJdbcURL("jdbc:sqlite:/database.db");
 		Set<Class<?>> entities = reflections.getTypesAnnotatedWith(Entity.class);
 		for(Class<?> entity : entities) {
 			addEntity(entity.getSimpleName(), entity);
 		}
 	}
 	public void addEntity(String name,Class<?> clazz) {
-		Table<?> t = new ListTable();
+		Table<?> t = new SQLTable(name,clazz);
+		//Table<?> t = new ListTable();
 		tables.put(name, t);
 	}
 	private static EntityManager instance = new EntityManager();

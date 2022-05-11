@@ -171,7 +171,7 @@ public class SQLTable<E> implements Table<E>{
 		return null;
 	}
 	private static Connection jdbcConnection = null;
-	public static String jdbcURL = "jdbc:sqlite:TEST";
+	public static String jdbcURL = "jdbc:sqlite::memory:";
 	public static void setJdbcURL(String jdbcURL) {
 		SQLTable.jdbcURL = jdbcURL;
 	}
