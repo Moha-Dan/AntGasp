@@ -9,7 +9,7 @@
 </head>
 <body>
 <a href="login">Login</a>
-	<haiku-searchpanel content="categories,commercant,prices" method="POST" action="search">
+	<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search">
 		<ul class="categories-list" id="categories">
 			<li>
 				<input type="button" class="card" value="Graphisme &amp; Design" >

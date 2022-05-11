@@ -24,6 +24,7 @@ public class Home {
 	@Method(value="/search")
 	public String panier_commercant(Model mdl) {
 		mdl.setAttribute("choices", paniers.find(mdl));
+		System.out.println(mdl.getAttribute("choices"));
 		return "search.jsp";
 	}
 	@Method(value="/login",method = Method.GET)

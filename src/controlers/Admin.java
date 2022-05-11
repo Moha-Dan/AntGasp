@@ -10,7 +10,9 @@ import com.fall.stereotype.Controler;
 import com.fall.ui.Model;
 import com.fall.web.bind.annotation.Method;
 
+import builder.FormBuilder;
 import entities.Commercant;
+import entities.Panier;
 import task.CommercantGRUD;
 import task.Login;
 import task.PanierGRUD;
@@ -73,6 +75,7 @@ public class Admin {
 		if(!login.hasSession(session))
 			return "redirect:login";
 		mdl.setAttribute("paniers", em.get("Panier"));
+		mdl.setAttribute("panier_group", (new FormBuilder()).buildGroup(new Panier()));
 		return "panier.jsp";
 	}
 	@Method(value="/panier",method = Method.POST)

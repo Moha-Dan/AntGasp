@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -70,10 +71,32 @@ public class ParseClass {
 		}
 		return c;
 	}
+	public static List<String> getProprietyNames(Object obj){
+		List<String> ls = new ArrayList<String>();
+		Field[] fields = obj.getClass().getDeclaredFields();
+		System.out.println(fields.length);
+		for(Field field : fields) {
+			String fn = field.getName();
+			String fl = (fn.charAt(0)+"").toUpperCase();
+			String name= "get"+fl+fn.substring(1);
+			System.out.println(name);
+			try {
+				Method m = obj.getClass().getDeclaredMethod(name);
+				if(m != null) {
+					ls.add(fn);
+				}
+			} catch (NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+		}
+		return ls;
+	}
 	public static Object getPropriety(Object obj,String field) {
 		Object value = null;
 		try {
-			Method m = obj.getClass().getDeclaredMethod("get"+field);
+			String fl = (field.charAt(0)+"").toUpperCase();
+			String name= "get"+fl+field.substring(1);
+			Method m = obj.getClass().getDeclaredMethod(name);
 			m.invoke(obj);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
@@ -82,7 +105,9 @@ public class ParseClass {
 	}
 	public static void setPropriety(Object obj,String field,Object value) {
 		try {
-			Method m = obj.getClass().getDeclaredMethod("set"+field, value.getClass());
+			String fl = (field.charAt(0)+"").toUpperCase();
+			String name= "set"+fl+field.substring(1);
+			Method m = obj.getClass().getDeclaredMethod(name, value.getClass());
 			m.invoke(obj, value);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();

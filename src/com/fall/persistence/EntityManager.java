@@ -22,8 +22,8 @@ public class EntityManager {
 		}
 	}
 	public void addEntity(String name,Class<?> clazz) {
-		Table<?> t = new SQLTable(name,clazz);
-		//Table<?> t = new ListTable();
+		//Table<?> t = new SQLTable(name,clazz);
+		Table<?> t = new ListTable();
 		tables.put(name, t);
 	}
 	private static EntityManager instance = new EntityManager();
