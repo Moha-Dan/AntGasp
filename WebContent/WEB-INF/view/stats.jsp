@@ -9,7 +9,7 @@
 <script src="http://mote.dyndns.biz/libs/haiku.js"></script>
 </head>
 <body template="classic">
-<div class="card centred">
+<div class="card centred col-10 col-lg-3 col-md-5 col">
 	${ result }
 	<p> Nombre utilisaeur : ${ usernb }</p>
 	<p> Nombre Panier : ${ paniernb }</p>
