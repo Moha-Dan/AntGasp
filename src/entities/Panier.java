@@ -1,6 +1,9 @@
 package entities;
 
+import java.util.List;
+
 import com.fall.persistence.Entity;
+import com.fall.persistence.ParseClass;
 
 import data.TypePanier;
 
@@ -51,5 +54,15 @@ public class Panier {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
+	@Override
+		public String toString() {
+			StringBuffer sb = new StringBuffer();
+			List<String> fields = ParseClass.getProprietyNames(this);
+			for(String field : fields) {
+				sb.append(field);
+				sb.append(" : ");
+				sb.append(ParseClass.getPropriety(this, field));
+			}
+			return sb.toString();
+		}
 }

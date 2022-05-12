@@ -75,7 +75,6 @@ public class Admin {
 		if(!login.hasSession(session))
 			return "redirect:login";
 		mdl.setAttribute("paniers", em.get("Panier"));
-		//(new FormBuilder()).buildGroup()
 		mdl.setAttribute("panier_group", new Panier());
 		return "panier.jsp";
 	}
@@ -98,6 +97,8 @@ public class Admin {
 				}
 				break;
 		}
+		mdl.setAttribute("paniers", em.get("Panier"));
+		mdl.setAttribute("panier_group", new Panier());
 		return "panier.jsp";
 	}
 	

@@ -73,6 +73,7 @@ public class ParseClass {
 	}
 	public static List<String> getProprietyNames(Object obj){
 		List<String> ls = new ArrayList<String>();
+		if(obj==null)return ls;
 		Field[] fields = obj.getClass().getDeclaredFields();
 		System.out.println(fields.length);
 		for(Field field : fields) {
@@ -104,6 +105,7 @@ public class ParseClass {
 		return value;
 	}
 	public static void setPropriety(Object obj,String field,Object value) {
+		assert obj!=null;
 		try {
 			String fl = (field.charAt(0)+"").toUpperCase();
 			String name= "set"+fl+field.substring(1);
