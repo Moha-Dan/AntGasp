@@ -9,9 +9,9 @@ public class ObjectBuilder{
 		List<String> ls = ParseClass.getProprietyNames(obj);
 		StringBuffer form = new StringBuffer();
 		System.out.print(ls);
-		form.append("<div class=\"col-10 col-lg-6 centred col\">");
+		form.append("<div class=\"col-10 col-lg-6 centred row\">");
 		for(String prop : ls) {
-			form.append("<div class=\"col-lg-10 col centred\">");
+			form.append("<div class=\"col-lg-10 row centred\">");
 			Object value = ParseClass.getPropriety(obj, prop);
 			String STRvalue = "";
 			form.append("<label class=\"form-label\">"+prop+"</label>");

@@ -9,7 +9,7 @@
 </head>
 <body>
 <a href="login">Login</a>
-	<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search">
+	<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search?want=panier">
 		<ul class="categories-list" id="categories">
 			<li>
 				<input type="button" class="card" value="Graphisme &amp; Design" >
@@ -46,7 +46,7 @@
 		<input type="number" name="Art-pricemax" value="5" min="5" max="100">
 	</div>
 	</haiku-searchpanel>
-	<haiku-searchpanel content="" method="POST" action="search">
+	<haiku-searchpanel content="" method="POST" action="search?want=commerce">
 		
 	</haiku-searchpanel>
 </body>

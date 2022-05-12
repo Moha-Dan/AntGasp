@@ -2,11 +2,14 @@ package task;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import com.fall.persistence.GRUD;
 import com.fall.persistence.Table;
+import com.fall.ui.Model;
 
 import entities.Commercant;
+import entities.Panier;
 
 public class CommercantGRUD extends GRUD<Commercant>{
 	Table<Commercant> commercant;
@@ -27,6 +30,13 @@ public class CommercantGRUD extends GRUD<Commercant>{
 		c.setVille(ville);
 		c.setAdresse(adress);
 		c.setCp(CP);
+		return commercant.find(c);
+	}
+	public Set<Commercant> find(Model mdl) {
+		Commercant c = new Commercant();
+		return filtre(c);
+	}
+	public Set<Commercant> filtre(Commercant c){
 		return commercant.find(c);
 	}
 }

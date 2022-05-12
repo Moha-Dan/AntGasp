@@ -11,4 +11,6 @@ public interface Model{
 	public Enumeration<String> getAttributeNames();
 	public String getAttributeAsString(String name);
 	public HttpServletRequest getRequest();
+	public double getAttributeAsNumber(String string);
+
 }

@@ -1,11 +1,13 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import com.fall.persistence.GRUD;
+import com.fall.persistence.ParseClass;
 import com.fall.persistence.Table;
 import com.fall.ui.Model;
 
@@ -22,6 +24,13 @@ public class PanierGRUD extends GRUD<Panier>{
 	}
 	public void add(Model m) {
 		Panier a = new Panier();
+		a.setContenu(m.getAttributeAsString("contenu"));
+		a.setDescription(m.getAttributeAsString("description"));
+		a.setName(m.getAttributeAsString("name"));
+		a.setPrice((float) m.getAttributeAsNumber("price"));
+		a.setQuantity((int) m.getAttributeAsNumber("quantity"));
+		//a.setType(null);
+		System.out.println("33"+a);
 		paniers.add(a);
 	}
 	public List<Panier> randomPanier(int n) {

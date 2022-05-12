@@ -154,12 +154,24 @@ public class ServletManager extends HttpServlet {
 		}
 		@Override
 		public String getAttributeAsString(String name) {
-			String[] strs = (String[]) request.getAttribute(name);
-			return strs[0];
+			Object obj = request.getAttribute(name);
+			if(obj==null)return null;
+			try {
+				String[] strs = (String[]) obj;				
+				return strs[0];
+			}catch(Exception e){
+				return null;
+			}
 		}
 		@Override
 		public HttpServletRequest getRequest() {
 			return (HttpServletRequest) request;
+		}
+		@Override
+		public double getAttributeAsNumber(String string) {
+			String str = getAttributeAsString(string);
+			Double d = Double.parseDouble(str);
+			return d;
 		}
 		
 	}

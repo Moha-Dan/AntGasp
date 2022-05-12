@@ -98,7 +98,8 @@ public class ParseClass {
 			String fl = (field.charAt(0)+"").toUpperCase();
 			String name= "get"+fl+field.substring(1);
 			Method m = obj.getClass().getDeclaredMethod(name);
-			m.invoke(obj);
+			value = m.invoke(obj);
+			System.out.println(name+" = "+value);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}

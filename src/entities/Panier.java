@@ -12,12 +12,23 @@ import data.TypePanier;
  */
 @Entity
 public class Panier {
+	public Panier(String description, String contenu, String name, TypePanier type, int quantity, float price) {
+		super();
+		this.description = description;
+		this.contenu = contenu;
+		this.name = name;
+		this.type = type;
+		this.quantity = quantity;
+		this.price = price;
+	}
+	public Panier() {
+	}
 	private String description;
 	private String contenu;
 	private String name;
 	private TypePanier type;
-	private int quantity;
-	private float price;
+	private int quantity = 1;
+	private float price = 0;
 	public String getDescription() {
 		return description;
 	}
@@ -62,6 +73,7 @@ public class Panier {
 				sb.append(field);
 				sb.append(" : ");
 				sb.append(ParseClass.getPropriety(this, field));
+				sb.append(" \n");
 			}
 			return sb.toString();
 		}

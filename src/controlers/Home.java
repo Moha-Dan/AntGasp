@@ -1,13 +1,17 @@
 package controlers;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
+import com.fall.builder.ObjectBuilder;
 import com.fall.persistence.EntityManager;
 import com.fall.stereotype.Controler;
 import com.fall.ui.Model;
 import com.fall.web.bind.annotation.Method;
 
 import entities.Panier;
+import task.CommercantGRUD;
 import task.Login;
 import task.PanierGRUD;
 
@@ -16,6 +20,7 @@ public class Home {
 	EntityManager em = EntityManager.createInstance();
 	Login login = new Login(em.get("User"));
 	PanierGRUD paniers = new PanierGRUD(em.get("Panier"));
+	CommercantGRUD commerce = new CommercantGRUD(em.get("Commercant"));
 	@Method("/")
 	public String index(Model mdl) {
 		mdl.setAttribute("paniers", paniers.randomPanier());
@@ -23,8 +28,18 @@ public class Home {
 	}
 	@Method(value="/search")
 	public String panier_commercant(Model mdl) {
-		mdl.setAttribute("choices", paniers.find(mdl));
-		System.out.println(mdl.getAttribute("choices"));
+		String want = mdl.getAttributeAsString("want");
+		if(want!=null && "commerce".equals(want)){
+			mdl.setAttribute("choices", commerce.find(mdl));
+		}else {
+			Set<Panier> choices = paniers.find(mdl);
+			StringBuffer sb = new StringBuffer();
+			for(Panier choice : choices){
+				sb.append(ObjectBuilder.buildGroup(choice));
+			}
+			mdl.setAttribute("choices",sb.toString());
+			System.out.println(mdl.getAttribute("choices"));
+		}
 		return "search.jsp";
 	}
 	@Method(value="/login",method = Method.GET)
