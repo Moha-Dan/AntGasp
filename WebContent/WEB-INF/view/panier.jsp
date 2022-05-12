@@ -9,7 +9,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-${ paniers }
+<c:forEach var="panier"  items="${paniers}" >
+	 <div class="card centred col-10 col-lg-3 col-md-5 col">
+            <h2>${ panier.nom }</h2>
+            <c:forEach var="elem"  items="${panier.list}" >
+            	<p>${ elem }</p>
+            </c:forEach>
+            <p class="text-start">${panier.prix}</p>
+        </div>
+</c:forEach>
+
 <form method="POST">
 	<input type="hidden" hidden name="operation" value="ADD">
 	<fall:form source="panier_group" />
