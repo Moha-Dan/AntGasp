@@ -1,10 +1,16 @@
-package builder;
+package com.fall.builder;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.List;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.SimpleTagSupport ;
 
 import com.fall.persistence.ParseClass;
 
-public class FormBuilder {
+public class FormBuilder extends SimpleTagSupport {
 	public FormBuilder() {
 		
 	}
@@ -27,5 +33,20 @@ public class FormBuilder {
 		System.out.println(form);
 		return form.toString();
 	}
-	
+	private Object source;
+
+	   public void setSource(String source) {
+	      this.source = source;
+	   }
+	@Override
+	public void doTag() throws JspException, IOException {
+		if(source!=null) {
+			JspWriter out = getJspContext().getOut();
+	         out.println( buildGroup(source) );
+		}else{
+			StringWriter sw = new StringWriter();
+			getJspBody().invoke(sw);
+	        getJspContext().getOut().println(sw.toString());
+		}
+	}
 }

@@ -4,13 +4,13 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import com.fall.builder.FormBuilder;
 import com.fall.persistence.EntityManager;
 import com.fall.persistence.Table;
 import com.fall.stereotype.Controler;
 import com.fall.ui.Model;
 import com.fall.web.bind.annotation.Method;
 
-import builder.FormBuilder;
 import entities.Commercant;
 import entities.Panier;
 import task.CommercantGRUD;
@@ -75,7 +75,8 @@ public class Admin {
 		if(!login.hasSession(session))
 			return "redirect:login";
 		mdl.setAttribute("paniers", em.get("Panier"));
-		mdl.setAttribute("panier_group", (new FormBuilder()).buildGroup(new Panier()));
+		//(new FormBuilder()).buildGroup()
+		mdl.setAttribute("panier_group", new Panier());
 		return "panier.jsp";
 	}
 	@Method(value="/panier",method = Method.POST)
