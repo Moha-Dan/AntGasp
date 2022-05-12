@@ -92,6 +92,16 @@ public class ParseClass {
 		}
 		return ls;
 	}
+	public static Class<?> getProprietyType(Object obj,String field) {
+		Class<?> value = String.class;
+		try {
+			Field f = obj.getClass().getDeclaredField(field);
+			value = f.getType();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
 	public static Object getPropriety(Object obj,String field) {
 		Object value = null;
 		try {
@@ -99,7 +109,7 @@ public class ParseClass {
 			String name= "get"+fl+field.substring(1);
 			Method m = obj.getClass().getDeclaredMethod(name);
 			value = m.invoke(obj);
-			System.out.println(name+" = "+value);
+			//System.out.println(name+" = "+value);
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}

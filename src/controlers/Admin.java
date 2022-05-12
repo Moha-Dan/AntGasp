@@ -1,10 +1,12 @@
 package controlers;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import com.fall.builder.FormBuilder;
+import com.fall.builder.ObjectBuilder;
 import com.fall.persistence.EntityManager;
 import com.fall.persistence.Table;
 import com.fall.stereotype.Controler;
@@ -60,7 +62,13 @@ public class Admin {
 		Set<String> tables = em.getTables();
 		for(String table : tables) {
 			Table<?> t = em.get(table);
-			mdl.setAttribute(table, t);
+			Iterator<?> it = t.iterator();
+			StringBuffer sb = new StringBuffer();
+			while(it.hasNext()) {
+				Object obj = it.next();
+				sb.append(ObjectBuilder.buildGroup(obj));
+			}
+			mdl.setAttribute(table, sb.toString());
 		}
 		mdl.setAttribute("usernb", em.get("User").size());
 		mdl.setAttribute("paniernb", em.get("Panier").size());

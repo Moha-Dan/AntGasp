@@ -11,6 +11,7 @@ import com.fall.persistence.ParseClass;
 import com.fall.persistence.Table;
 import com.fall.ui.Model;
 
+import data.TypePanier;
 import entities.Panier;
 
 public class PanierGRUD extends GRUD<Panier>{
@@ -29,7 +30,7 @@ public class PanierGRUD extends GRUD<Panier>{
 		a.setName(m.getAttributeAsString("name"));
 		a.setPrice((float) m.getAttributeAsNumber("price"));
 		a.setQuantity((int) m.getAttributeAsNumber("quantity"));
-		//a.setType(null);
+		a.setType(TypePanier.valueOf(m.getAttributeAsString("type")));
 		System.out.println("33"+a);
 		paniers.add(a);
 	}

@@ -8,12 +8,14 @@
 <link rel="stylesheet" href="./style.css" />
 <script src="http://mote.dyndns.biz/libs/haiku.js"></script>
 </head>
-<body template="classic">
+<body template>
 <div class="card centred col-10 col-lg-3 col-md-5 col">
 	${ result }
 	<p> Nombre utilisaeur : ${ usernb }</p>
 	<p> Nombre Panier : ${ paniernb }</p>
 	<p> Nombre Commercant : ${ commercantnb }</p>
 </div>
+	<h2 class="centred">Paniers</h2>
+	<div class="col">${ Panier }</div>
 </body>
 </html>

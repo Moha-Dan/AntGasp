@@ -32,11 +32,11 @@ public class ListTable<E> implements Table<E> {
 			Iterator<String> it1 = props.iterator();
 			while(it1.hasNext() && isequal) {
 				String key = it1.next();
-				Object value = ParseClass.getPropriety(ent, key);
+				Object value = ParseClass.getPropriety(entity, key);
 				if(value!=null) {
-					Object value1 = ParseClass.getPropriety(entity, key);
+					Object value1 = ParseClass.getPropriety(ent, key);
 					if(!value.equals(value1)) {
-						System.out.println(value+" "+value1);
+						System.out.println("39"+value+" : "+value1+"||");
 						isequal = false;
 					}
 				}
