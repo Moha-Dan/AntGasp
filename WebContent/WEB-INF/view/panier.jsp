@@ -8,7 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-${ paniers }
+<c:forEach var="panier"  items="${requestScope['paniers']}" >
+	<div class="card centred">
+	${ panier.nom }
+	</div>
+</c:forEach>
+
 <form method="POST">
 	<input type="hidden" hidden name="operation" value="ADD">
 	${ panier_group }

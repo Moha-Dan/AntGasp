@@ -5,11 +5,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="./style.css" />
+<script src="http://mote.dyndns.biz/libs/haiku.js"></script>
 </head>
-<body>
-${ result }
-<p> Nombre utilisaeur : ${ usernb }</p>
-<p> Nombre Panier : ${ paniernb }</p>
-<p> Nombre Commercant : ${ commercantnb }</p>
+<body template="classic">
+<div class="card centred">
+	${ result }
+	<p> Nombre utilisaeur : ${ usernb }</p>
+	<p> Nombre Panier : ${ paniernb }</p>
+	<p> Nombre Commercant : ${ commercantnb }</p>
+</div>
 </body>
 </html>
