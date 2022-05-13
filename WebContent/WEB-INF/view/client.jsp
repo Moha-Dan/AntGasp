@@ -11,21 +11,17 @@
   padding: 15px;
   margin: auto;
 }
-
 .form-signin .checkbox {
   font-weight: 400;
 }
-
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
-
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
@@ -39,7 +35,6 @@
 .has-danger .fv-plugins-icon {
   color: #dc3545;
 }
-
 </style>
 
 <meta charset="UTF-8">
@@ -67,8 +62,8 @@
 			<div class="row form-label">
 				<button class="btn outline" type="submit">Se Connecter</button>
 			</div>
-		</form>
-	</div>
+				</form>
+					</div>
 	</div>
 </section>
 <section class="row clean-block">
@@ -97,4 +92,4 @@
 	</div>
 </section>
 </body>
-</html>
+</html> 
