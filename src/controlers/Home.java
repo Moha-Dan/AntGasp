@@ -10,6 +10,7 @@ import com.fall.stereotype.Controler;
 import com.fall.ui.Model;
 import com.fall.web.bind.annotation.Method;
 
+import entities.Commercant;
 import entities.Panier;
 import entities.User;
 import task.Client;
@@ -63,7 +64,12 @@ public class Home {
 			mdl.setAttribute("connected", true);
 		String want = mdl.getAttributeAsString("want");
 		if(want!=null && "commerce".equals(want)){
-			mdl.setAttribute("choices", commerce.find(mdl));
+			Set<Commercant> choices = commerce.find(mdl);
+			StringBuffer sb = new StringBuffer();
+			for(Commercant choice : choices){
+				sb.append(ObjectBuilder.buildGroup(choice));
+			}
+			mdl.setAttribute("choices",sb.toString());
 		}else {
 			Set<Panier> choices = paniers.find(mdl);
 			StringBuffer sb = new StringBuffer();

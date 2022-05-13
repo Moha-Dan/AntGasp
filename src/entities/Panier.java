@@ -34,8 +34,8 @@ public class Panier {
 	private String contenu;
 	private String name;
 	private TypePanier type;
-	private int quantity = 1;
-	private float price = 0;
+	private Integer quantity;
+	private Float price;
 	public String getDescription() {
 		return description;
 	}
@@ -60,13 +60,13 @@ public class Panier {
 	public void setType(TypePanier type) {
 		this.type = type;
 	}
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public float getPrice() {
+	public Float getPrice() {
 		return price;
 	}
 	public void setPrice(float price) {

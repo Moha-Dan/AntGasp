@@ -15,34 +15,35 @@
 	<%@include file="nav.jsp"%>
 	<header class="clean-block" style="color:#2222;">
 	<div class="col-12">
-		<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search?want=panier">
+		<haiku-searchpanel content="panier,commercant" method="GET" action="search?want=panier">
 		<div id="panier" name="panier" class="clean-form form">
-			<%= FormBuilder.buildGroup(new Panier()) %>
+			<%= FormBuilder.buildPropriety(new Panier(),"type") %>
+			<label>Devise</label>
+		<select>
+			<option>€</option>
+			<option>$</option>
+		</select>
+		<label>Prix visé</label>
+		<input type="number" name="pricemin" value="5" min="5" max="100" onchange="var v = this.parentElement.querySelector('input[name=pricemax]');v.min=this.value;if(~~(v.value)<~~(v.min))v.value = this.value">
+		<label>Prix Maximal</label>
+		<input type="number" name="pricemax" value="5" min="5" max="100">
 		</div>
-		<ul class="categories-list" id="categories">
-			<li>
-		</ul>
 		<div id="commercant" name="commercant" class="clean-form form">
 			<input type="text" name="nomCommercial" placeholder="Nom Commercial" />
 			<input type="text" name="adresse" placeholder="Adresse" />
 			<input type="text" name="ville" placeholder="Ville" />
 			<input type="text" name="cp" placeholder="Code Postal" />
 			<input type="button" class="next action-button" value="Suivant" name="next"/>
-		</div>
-		<div id="prices" class="clean-form form">
-		<label>Devise</label>
-		<select>
-			<option>€</option>
-			<option>$</option>
-		</select>
-		<label>Prix visé</label>
-		<input type="number" name="Art-price" value="5" min="5" max="100" onchange="var v = this.parentElement.querySelector('input[name=pricemax]');v.min=this.value;if(~~(v.value)<~~(v.min))v.value = this.value">
-		<label>Prix Maximal</label>
-<input type="number" name="Art-pricemax" value="5" min="5" max="100">
-	</div>
+		</div>v>
 	</haiku-searchpanel>
-	<haiku-searchpanel content="" method="POST" action="search?want=commerce">
-		
+	<haiku-searchpanel content="commercant" method="GET" action="search?want=commerce">
+		<div id="commercant" name="commercant" class="clean-form form">
+			<input type="hidden" hidden name="want" value="commerce" />
+			<input type="text" name="nomCommercial" placeholder="Nom Commercial" />
+			<input type="text" name="adresse" placeholder="Adresse" />
+			<input type="text" name="ville" placeholder="Ville" />
+			<input type="text" name="cp" placeholder="Code Postal" />
+		</div>
 	</haiku-searchpanel>
 
 	</div>
