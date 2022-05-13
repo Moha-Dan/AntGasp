@@ -1,3 +1,5 @@
+<%@page import="com.fall.persistence.Table"%>
+<%@page import="entities.Panier"%>
 <%@page import="com.fall.builder.FormBuilder"%>
 <%@page import="com.fall.builder.ObjectBuilder"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -9,26 +11,25 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
-<c:forEach var="panier"  items="${paniers}" >
-	 <div class="card centred col-10 col-lg-3 col-md-5 col">
-            <h2>${ panier.name }</h2>
-            <c:forEach var="elem"  items="${panier.list}" >
-            	<p>${ elem }</p>
-            </c:forEach>
-            <h2>${ panier }</h2>
-            <p class="text-start">${panier.prix}</p>
-        </div>
-</c:forEach>
-
-<form method="POST">
-	<input type="hidden" hidden name="operation" value="ADD">
-	<fall:form source="panier_group" />
-	<%= FormBuilder.buildGroup(request.getAttribute("panier_group")) %>
-	<div class="col-10 col-lg-6 centred col">
-		<input class="btn outline col-6" type="submit">
-	</div>
-	
-</form>
+<body template="classic">
+	<main class="row">
+		<div class="col-6 centred-line col">
+			<h2 class="centred">Paniers existant</h2>
+			<% Table<Panier> paniers = (Table) request.getAttribute("paniers"); %>
+			<% for(Panier panier : paniers){ %>
+				<%= ObjectBuilder.buildGroup(panier,"centred row") %>
+			<% } %>
+		</div>
+		<div class="col-6 centred-line col">
+			<h2 class="centred-line">Ajouter un panier</h2>
+			<form method="POST">
+				<input type="hidden" hidden name="operation" value="ADD">
+				<%= FormBuilder.buildGroup(request.getAttribute("panier_group"),"col-10 centred col") %>
+				<div class="col-10 col-lg-6 centred col form-submit">
+					<input class="btn outline col-6 form-submit" type="submit">
+				</div>
+			</form>
+		</div>
+	</main>
 </body>
 </html>

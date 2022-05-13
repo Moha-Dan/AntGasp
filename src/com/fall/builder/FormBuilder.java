@@ -10,9 +10,12 @@ public class FormBuilder{
 		
 	}
 	public static String buildGroup(Object obj){
+		return buildGroup(obj,"col-10 col-lg-6 centred row");
+	}
+	public static String buildGroup(Object obj,String clazz){
 		List<String> ls = ParseClass.getProprietyNames(obj);
 		StringBuffer form = new StringBuffer();
-		form.append("<div class=\"col-10 col-lg-6 centred col\">");
+		form.append("<div class=\""+clazz+"\">");
 		for(String prop : ls) {
 			form.append("<div class=\"col-lg-10 col centred\">");
 			Object value = ParseClass.getPropriety(obj, prop);
