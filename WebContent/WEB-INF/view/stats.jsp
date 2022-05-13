@@ -28,11 +28,12 @@
 	<a href="invite">Ajouter un commercant</a>
 </div>
 	<h2 class="centred">Paniers</h2>
-	<% Table<Panier> paniers = (Table) request.getAttribute("paniers"); %>
-		<% for(Panier panier : paniers){ %>
-			<%= ObjectBuilder.buildGroup(panier,"centred row") %>
-		<% } %>
-
-
+	<div class="col">${ Panier }</div>
+	<h2 class="centred">Commandes</h2>
+	<div class="col">${ Commande }</div>
+	<h2 class="centred">Utilisateurs</h2>
+	<div class="col">${ User }</div>
+	<h2 class="centred">Commercants</h2>
+	<div class="col">${ Commercant }</div>
 </body>
 </html>
