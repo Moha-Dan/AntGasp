@@ -4,6 +4,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
+
 import com.fall.persistence.GRUD;
 import com.fall.persistence.ParseClass;
 import com.fall.persistence.Table;
@@ -64,5 +66,8 @@ public class PanierGRUD extends GRUD<Panier>{
 	}
 	public List<Panier> randomPanier() {
 		return randomPanier(5);
+	}
+	public Panier get(String attribute) {
+		return paniers.get(UUID.fromString(attribute));
 	}
 }

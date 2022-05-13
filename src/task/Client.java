@@ -40,7 +40,13 @@ public class Client {
 		return lp;
 	}
 	public void order(User u, Panier p) {
-		
+		System.out.println("buy panier :"+p);
+		if(u!=null && p!=null) {
+			Commande c = new Commande();
+			c.setClient(u);
+			c.setPanier(p);
+			commandes.add(c);
+		}
 	}
 	
 }

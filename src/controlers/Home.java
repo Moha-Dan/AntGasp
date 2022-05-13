@@ -50,11 +50,11 @@ public class Home {
 		}
 		User u = login.userInfo(session);
 		if(mdl.hasAttribute("panier")){
-			Panier p = (Panier) mdl.getAttribute("panier");
+			Panier p = paniers.get(mdl.getAttributeAsString("panier"));
 			clients.order(u,p);
 			return "redirect:dashboard";
 		}
-		return "redirect:/";
+		return "dashboard.jsp";
 	}
 	@Method(value="/search")
 	public String panier_commercant(Model mdl) {

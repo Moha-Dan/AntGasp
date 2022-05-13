@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
+import entities.Panier;
 
 public class ListTable<E> implements Table<E> {
 	public ListTable() {
@@ -69,5 +73,41 @@ public class ListTable<E> implements Table<E> {
 			 	*/
 			return isequal;
 		}).collect(Collectors.toSet());
+	}
+	@Override
+	public E get(UUID uuid) {
+		Optional<E> op = ls.stream().filter((E ent)->{
+			boolean isequal = true;
+			List<String> props = ParseClass.getProprietyNames(ent);
+			Iterator<String> it = props.iterator();
+			String key = null;
+			boolean fieldfind = false;
+			while (it.hasNext() && !fieldfind) {
+				key = (String) it.next();
+				Field f = null;
+				try {
+					f = ent.getClass().getDeclaredField(key);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				if(f!=null && f.isAnnotationPresent(Id.class)) {
+					fieldfind = true;
+				}
+			}
+			if(fieldfind) {
+				Object value1 = ParseClass.getPropriety(ent, key);
+				if(!uuid.equals(value1)) {
+					System.out.println("98"+uuid+" : "+value1+"||");
+					isequal = false;
+				}
+			}else {
+				isequal = false;
+			}
+			return isequal;
+		}).findFirst();
+		if(op.isEmpty()) {
+			return null;
+		}
+		return op.get();
 	}
 }

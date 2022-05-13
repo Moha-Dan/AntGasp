@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
+
+import entities.Panier;
 
 
 public class SQLTable<E> implements Table<E>{
@@ -213,5 +216,10 @@ public class SQLTable<E> implements Table<E>{
 			e.printStackTrace();
 			return jdbcConnection != null;
 		}
+	}
+
+	@Override
+	public E get(UUID uuid) {
+		return null;
 	}
 }
