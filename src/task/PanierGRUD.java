@@ -37,13 +37,15 @@ public class PanierGRUD extends GRUD<Panier>{
 	public List<Panier> randomPanier(int n) {
 		Iterator<Panier> it = paniers.iterator();
 		List<Panier> lp = new ArrayList<>();
+		
 		while(it.hasNext()) {
 			Panier p = it.next();
-			if(n<0 && Math.random()>.5) {
+			if(n>0 && Math.random()>.5) {
 				lp.add(p);
 				n--;
 			}
 		}
+		System.out.println(lp);
 		return lp;
 	}
 	public Set<Panier> find(Model m) {
