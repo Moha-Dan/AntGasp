@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="./style.css" />
 <script src="http://mote.dyndns.biz/libs/haiku.js"></script>
-</head>
-<body template>
+</head>	
+<body template class="col">
+<header>
+	<%@include file="nav.jsp"%>
+</header>
 <div class="card centred col-10 col-lg-3 col-md-5 col">
 	${ result }
 	<p> Nombre utilisaeur : ${ usernb }</p>
@@ -17,5 +20,7 @@
 </div>
 	<h2 class="centred">Paniers</h2>
 	<div class="col">${ Panier }</div>
+
+
 </body>
 </html>
