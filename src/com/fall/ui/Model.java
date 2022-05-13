@@ -12,5 +12,6 @@ public interface Model{
 	public String getAttributeAsString(String name);
 	public HttpServletRequest getRequest();
 	public double getAttributeAsNumber(String string);
+	public boolean hasAttribute(String string);
 
 }

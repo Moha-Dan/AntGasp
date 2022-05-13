@@ -38,7 +38,6 @@ public class Home {
 				sb.append(ObjectBuilder.buildGroup(choice));
 			}
 			mdl.setAttribute("choices",sb.toString());
-			System.out.println(mdl.getAttribute("choices"));
 		}
 		return "search.jsp";
 	}

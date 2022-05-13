@@ -8,7 +8,7 @@ public class ObjectBuilder{
 	public static String buildGroup(Object obj){
 		List<String> ls = ParseClass.getProprietyNames(obj);
 		StringBuffer form = new StringBuffer();
-		System.out.print("11"+ls);
+		//System.out.print("11"+ls);
 		form.append("<div class=\"col-10 col-lg-6 centred row\">");
 		for(String prop : ls) {
 			form.append("<div class=\"col-lg-10 row centred\">");
@@ -21,7 +21,7 @@ public class ObjectBuilder{
 			form.append("</div>");
 		}
 		form.append("</div>");
-		System.out.println(form);
+		//System.out.println(form);
 		return form.toString();
 	}
 }

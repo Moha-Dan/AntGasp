@@ -46,9 +46,23 @@ public class PanierGRUD extends GRUD<Panier>{
 		}
 		return lp;
 	}
-	public Set<Panier> find(Model mdl) {
-		Panier p = new Panier();
-		return paniers.find(p);
+	public Set<Panier> find(Model m) {
+		Panier a = new Panier();
+		if(m.hasAttribute("contenu"))
+			a.setContenu(m.getAttributeAsString("contenu"));
+		if(m.hasAttribute("description"))
+			a.setDescription(m.getAttributeAsString("description"));
+		if(m.hasAttribute("name"))
+			a.setName(m.getAttributeAsString("name"));
+		if(m.hasAttribute("price"))
+			a.setPrice((float) m.getAttributeAsNumber("price"));
+		if(m.hasAttribute("quantity"))
+			a.setQuantity((int) m.getAttributeAsNumber("quantity"));
+		if(m.hasAttribute("type"))
+			a.setType(TypePanier.valueOf(m.getAttributeAsString("type")));
+		System.out.println(m.hasAttribute("type")+" == "+m.getAttributeAsString("type"));
+		System.out.println(a);
+		return paniers.find(a);
 	}
 	public List<Panier> randomPanier() {
 		return randomPanier(5);

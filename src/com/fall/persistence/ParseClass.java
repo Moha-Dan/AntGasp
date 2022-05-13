@@ -75,12 +75,12 @@ public class ParseClass {
 		List<String> ls = new ArrayList<String>();
 		if(obj==null)return ls;
 		Field[] fields = obj.getClass().getDeclaredFields();
-		System.out.println(fields.length);
+		//System.out.println(fields.length);
 		for(Field field : fields) {
 			String fn = field.getName();
 			String fl = (fn.charAt(0)+"").toUpperCase();
 			String name= "get"+fl+fn.substring(1);
-			System.out.println(name);
+			//System.out.println(name);
 			try {
 				Method m = obj.getClass().getDeclaredMethod(name);
 				if(m != null) {

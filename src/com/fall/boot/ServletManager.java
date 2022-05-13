@@ -88,7 +88,12 @@ public class ServletManager extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(request.getRequestURI());
 		Model mdl = new ConcretModel(request);
+		Map<String, String[]> rmp = request.getParameterMap();
 
+		for( String parm : rmp.keySet()) {
+			mdl.setAttribute(parm, rmp.get(parm));
+		}
+		
 		String view = matcher(request, mdl);
 
 		if(view==null) return;
@@ -172,6 +177,10 @@ public class ServletManager extends HttpServlet {
 			String str = getAttributeAsString(string);
 			Double d = Double.parseDouble(str);
 			return d;
+		}
+		@Override
+		public boolean hasAttribute(String string) {
+			return getAttribute(string)!=null;
 		}
 		
 	}
