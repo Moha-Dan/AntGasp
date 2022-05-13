@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="stats">Stats</a>
-<a href="panier">Paniers</a>
-<a href="invite">Commercants</a>
-</body>
+${ userinfo }
+${ userpanier }
 </html>

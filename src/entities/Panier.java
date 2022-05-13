@@ -1,8 +1,10 @@
 package entities;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.fall.persistence.Entity;
+import com.fall.persistence.Id;
 import com.fall.persistence.ParseClass;
 
 import data.TypePanier;
@@ -12,6 +14,11 @@ import data.TypePanier;
  */
 @Entity
 public class Panier {
+	@Id
+	private UUID uuid = UUID.randomUUID();
+	public UUID getUuid() {
+		return uuid;
+	}
 	public Panier(String description, String contenu, String name, TypePanier type, int quantity, float price) {
 		super();
 		this.description = description;

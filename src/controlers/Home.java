@@ -11,6 +11,8 @@ import com.fall.ui.Model;
 import com.fall.web.bind.annotation.Method;
 
 import entities.Panier;
+import entities.User;
+import task.Client;
 import task.CommercantGRUD;
 import task.Login;
 import task.PanierGRUD;
@@ -19,15 +21,46 @@ import task.PanierGRUD;
 public class Home {
 	EntityManager em = EntityManager.createInstance();
 	Login login = new Login(em.get("User"));
+	Client clients = new Client(em.get("Commande"));
 	PanierGRUD paniers = new PanierGRUD(em.get("Panier"));
 	CommercantGRUD commerce = new CommercantGRUD(em.get("Commercant"));
 	@Method("/")
 	public String index(Model mdl) {
+		HttpSession session = mdl.getRequest().getSession(false);
+		if(login.hasSession(session))
+			mdl.setAttribute("connected", true);
 		mdl.setAttribute("paniers", paniers.randomPanier());
 		return "index.jsp";
 	}
+	@Method(value="/dashboard")
+	public String dashboard(Model mdl) {
+		HttpSession session = mdl.getRequest().getSession(false);
+		if(!login.hasSession(session))
+			return "redirect:login";
+		User user = login.userInfo(session);
+		mdl.setAttribute("userinfo",user );
+		mdl.setAttribute("userpanier", clients.getPaniers(user));
+		return "dashboard.jsp";
+	}
+	@Method(value="/buy",method = Method.POST)
+	public String buy(Model mdl) {
+		HttpSession session = mdl.getRequest().getSession(false);
+		if(!login.hasSession(session)) {
+			return "redirect:login";
+		}
+		User u = login.userInfo(session);
+		if(mdl.hasAttribute("panier")){
+			Panier p = (Panier) mdl.getAttribute("panier");
+			clients.order(u,p);
+			return "redirect:dashboard";
+		}
+		return "redirect:/";
+	}
 	@Method(value="/search")
 	public String panier_commercant(Model mdl) {
+		HttpSession session = mdl.getRequest().getSession(false);
+		if(!login.hasSession(session))
+			mdl.setAttribute("connected", true);
 		String want = mdl.getAttributeAsString("want");
 		if(want!=null && "commerce".equals(want)){
 			mdl.setAttribute("choices", commerce.find(mdl));
@@ -36,6 +69,7 @@ public class Home {
 			StringBuffer sb = new StringBuffer();
 			for(Panier choice : choices){
 				sb.append(ObjectBuilder.buildGroup(choice));
+				sb.append(clients.createButton(choice,"buy"));
 			}
 			mdl.setAttribute("choices",sb.toString());
 		}
