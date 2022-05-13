@@ -1,3 +1,4 @@
+<%@page import="com.fall.builder.FormBuilder"%>
 <%@page import="com.fall.builder.ObjectBuilder"%>
 <%@page import="java.util.List"%>
 <%@page import="entities.Panier"%>
@@ -15,6 +16,9 @@
 	<header class="clean-block" style="color:#2222;">
 	<div class="col-12">
 		<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search?want=panier">
+		<div id="panier" name="panier" class="clean-form form">
+			<%= FormBuilder.buildGroup(new Panier()) %>
+		</div>
 		<ul class="categories-list" id="categories">
 			<li>
 		</ul>
