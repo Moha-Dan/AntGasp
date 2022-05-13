@@ -11,33 +11,37 @@
 <script src="http://mote.dyndns.biz/libs/haiku.js"></script>
 </head>
 <body template="market">
-		<style>
-			haiku-burger{
-				width:3em;
-				height:3em;
-			}
-			#navbar.open{
-				display:flex;
-			}
-		</style>
-	<nav>
-		<ul  id="navbar" class="hide-sm list centred row" >
-			<li>
-				<a class="nav-item centred" href="login">Login</a>
-			</li>
-		</ul>
-		<div class="list centred row" >
-			<haiku-light class="nav-item centred" ></haiku-light>
-			<haiku-burger class="hide-lg centred" menu="navbar" style="height: 3em;width: 3em;--dark: #333;"></haiku-burger>
-		</div>
-	</nav>
-	<header>
-	<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search?want=panier">
+	<%@include file="nav.jsp"%>
+	<header class="clean-block" style="color:#2222;">
+	<div class="col-12">
+		<haiku-searchpanel content="categories,commercant,prices" method="GET" action="search?want=panier">
 		<ul class="categories-list" id="categories">
 			<li>
+		</ul>
+		<div id="commercant" name="commercant" class="clean-form form">
+			<input type="text" name="nomCommercial" placeholder="Nom Commercial" />
+			<input type="text" name="adresse" placeholder="Adresse" />
+			<input type="text" name="ville" placeholder="Ville" />
+			<input type="text" name="cp" placeholder="Code Postal" />
+			<input type="button" class="next action-button" value="Suivant" name="next"/>
+		</div>
+		<div id="prices" class="clean-form form">
+		<label>Devise</label>
+		<select>
+			<option>€</option>
+			<option>$</option>
+		</select>
+		<label>Prix visé</label>
+		<input type="number" name="Art-price" value="5" min="5" max="100" onchange="var v = this.parentElement.querySelector('input[name=pricemax]');v.min=this.value;if(~~(v.value)<~~(v.min))v.value = this.value">
+		<label>Prix Maximal</label>
+<input type="number" name="Art-pricemax" value="5" min="5" max="100">
+	</div>
+	</haiku-searchpanel>
 	<haiku-searchpanel content="" method="POST" action="search?want=commerce">
 		
 	</haiku-searchpanel>
+
+	</div>
 	</header>
 	<main>
 		<div class="col-6 centred-line col">
