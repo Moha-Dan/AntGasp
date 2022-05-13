@@ -42,3 +42,7 @@ Une base de donnée au forma sql est utiliser pour sauvegarder les données
 
 
 Le css utiliser par haikuCSS. Ces un ensemble d'instruction se basant sur bootstrap.
+
+
+
+Tom TOUZE, Alexandre LEGAL et Bastian LEGUAY 
