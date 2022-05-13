@@ -54,7 +54,7 @@ public class Admin {
 	}
 	
 	
-	@Method("/stats")
+	@Method("/dashboard")
 	public String stats(Model mdl) {
 		HttpSession session = mdl.getRequest().getSession(false);
 		if(!login.hasSession(session))
@@ -110,15 +110,6 @@ public class Admin {
 		return "panier.jsp";
 	}
 	
-	@Method("/dashboard")
-	public String dashboard(Model mdl) {
-		HttpSession session = mdl.getRequest().getSession(false);
-		if(!login.hasSession(session))
-			return "redirect:login";
-		return "dashboard.jsp";
-	}
-	
-	
 	@Method(value="/login",method = Method.GET)
 	public String login(Model mdl) {
 		HttpSession session = mdl.getRequest().getSession(false);
@@ -132,7 +123,7 @@ public class Admin {
 		String username = mdl.getAttributeAsString("userName");
 		String password =  mdl.getAttributeAsString("password");
 		HttpSession session = mdl.getRequest().getSession(true);
-		if(!login.connect(username,password,session) ){
+		if(!login.Adminconnect(username,password,session) ){
 			mdl.setAttribute("error", "il n'y a pas de system de connection");
 			return "login.jsp";	
 		}else {

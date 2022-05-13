@@ -1,5 +1,6 @@
 package com.fall.persistence;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,12 +33,20 @@ public class ListTable<E> implements Table<E> {
 			Iterator<String> it1 = props.iterator();
 			while(it1.hasNext() && isequal) {
 				String key = it1.next();
-				Object value = ParseClass.getPropriety(entity, key);
-				if(value!=null) {
-					Object value1 = ParseClass.getPropriety(ent, key);
-					if(!value.equals(value1)) {
-						System.out.println("39"+value+" : "+value1+"||");
-						isequal = false;
+				Field f = null;
+				try {
+					f = entity.getClass().getDeclaredField(key);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				if(f!=null && ! f.isAnnotationPresent(Id.class)) {
+					Object value = ParseClass.getPropriety(entity, key);
+					if(value!=null) {
+						Object value1 = ParseClass.getPropriety(ent, key);
+						if(!value.equals(value1)) {
+							System.out.println("39"+value+" : "+value1+"||");
+							isequal = false;
+						}
 					}
 				}
 			}

@@ -10,7 +10,10 @@
     <nav>
         <ul  id="navbar" class="hide-sm list centred row" >
             <li>
-                <a class="nav-item centred" href="login">Login</a>
+           
+            	<% if(request.getAttribute("connected")==null){ %>
+                	<a class="nav-item centred" href="login">Login</a>
+                <% } %>
             </li>
         </ul>
         <div class="list centred row" >
