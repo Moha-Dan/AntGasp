@@ -12,6 +12,9 @@
 <title>Insert title here</title>
 </head>
 <body template="classic">
+<header>
+	<%@include file="nav.jsp"%>
+</header>
 	<main class="row">
 		<div class="col-6 centred-line col">
 			<h2 class="centred">Paniers existant</h2>
